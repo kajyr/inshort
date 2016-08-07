@@ -22,6 +22,7 @@ const options = {
 };
 
 mongoose.connect(mongoUri, options);
+mongoose.Promise = global.Promise;
 
 const db = mongoose.connection; 
 

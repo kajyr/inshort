@@ -1,7 +1,7 @@
 const Joi        = require('joi');  
 const mongoose   = require('mongoose');  
 const Schema     = mongoose.Schema;  
-const createHash = require('./createhash');  
+const shortid    = require('shortid');
 const hashLen    = 8; /* 8 chars long */  
 // Local machine? Set baseUrl to 'http://localhost:3000'
 // It's important that you don't add the slash at the end
@@ -39,16 +39,30 @@ module.exports = [
 	method: 'POST',
 	path: '/new',
 	handler(request, reply) {
-		const uniqueID = createHash(hashLen);
-		const newRedir = new Redir({
-			shortUrl: `${baseUrl}/${uniqueID}`,
-			url: request.payload.url,
-			createdAt: new Date()
+		const uniqueID = shortid.generate();
+		const url = request.payload.url;
+
+		Redir.findOne({ url: url }, (err, data) => {
+			// doc is a Document
+			if (err) { return reply(err); }
+			if (data !== null) { return reply(data); }
+
+
+			const newRedir = new Redir({
+				shortUrl: `${baseUrl}/${uniqueID}`,
+				url: url,
+				createdAt: new Date()
+			});
+
+			
+			newRedir.save((err, redir) => {
+				if (err) { reply(err); } else { reply(redir); }
+			});
+			
+
 		});
 
-		newRedir.save((err, redir) => {
-			if (err) { reply(err); } else { reply(redir); }
-		});
+		
 	},
 	config: {
 		validate: {
