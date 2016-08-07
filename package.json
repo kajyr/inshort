@@ -1,0 +1,32 @@
+{
+  "name": "inshort",
+  "version": "1.0.0",
+  "description": "",
+  "main": "shortener.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kajyr/inshort.git"
+  },
+  "author": "Carlo 'kajyr' <carlo.panzi@gmail.com> (http://kajyr.github.io/)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kajyr/inshort/issues"
+  },
+  "keywords": [
+    "url",
+    "shortener",
+    "app",
+    "hapi"
+  ],
+  "homepage": "https://github.com/kajyr/inshort#readme",
+  "dependencies": {
+    "dotenv": "^2.0.0",
+    "hapi": "^14.1.0",
+    "inert": "^4.0.1",
+    "joi": "^9.0.4",
+    "mongoose": "^4.5.8"
+  }
+}
