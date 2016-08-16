@@ -40,10 +40,31 @@
 
 		<main>
 			<div class="container">
-					<p>
-						Have some fun :)
-					</p>
+					<form id="shorten-form" method="POST">
+						<div class="icon-container">
+							<input type="text" placeholder="Paste your URL here..." name="url">
+							<i class="fa fa-link"></i>
+						</div>
+						<input type="submit" value="Shorten!">
+					</form>
+					
+					<div class="row">
+						<div class="column">
+							<section id="shortened">
+								<p>
+									<em>Your shortened link: </em>
+									<a id="link" href="#" target="_blank">Loading...</a>
+								</p>
+								<p>
+									Right-click or Tap &amp; Hold the link and copy the address to clipboard and start using it.
+								</p>
+							</section>
+						</div>
+					</div>
 			</div>
 		</main>
+		
+		<script src="public/nanoajax.min.js"></script>
+		<script src="public/scripts.js"></script>
 	</body>
 </html>

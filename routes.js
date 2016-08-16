@@ -9,8 +9,8 @@ const conf = require('./conf');
 ================================================*/
 
 const redirSchema = new Schema({  
-	shortUrl: String,
 	url: String,
+	hash: String,
 	createdAt: Date
 });
 
@@ -26,6 +26,13 @@ module.exports = [
 },
 {
 	method: 'GET',
+	path: '/new',
+	handler(request, reply) {
+		reply.file('views/new.html');
+	}
+},
+{
+	method: 'GET',
 	path: '/public/{file}',
 	handler(request, reply) {
 		reply.file(`public/${request.params.file}`);
@@ -37,13 +44,21 @@ module.exports = [
 	handler(request, reply) {
 		const uniqueID = shortid.generate();
 		const newRedir = new Redir({
-			shortUrl: `${conf.BASE_URL}/${uniqueID}`,
+			hash: uniqueID,
 			url: request.payload.url,
 			createdAt: new Date()
 		});
 
 		newRedir.save((err, redir) => {
-			if (err) { reply(err); } else { reply(redir); }
+			if (err) {
+				reply(err)
+			} else {
+				reply({
+					shortUrl: `${conf.BASE_URL}/${redir.hash}`,
+					createdAt: redir.createdAt,
+					url: redir.url
+				})
+			}
 		});
 	},
 	config: {
@@ -61,7 +76,7 @@ module.exports = [
 	path:'/{hash}',
 	handler(request, reply) {
 		const query = {
-			'shortUrl': `${conf.BASE_URL}/${request.params.hash}`
+			'hash': request.params.hash
 		};
 
 		Redir.findOne(query, (err, redir) => {
