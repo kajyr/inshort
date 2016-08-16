@@ -14,4 +14,4 @@ url: ...
 
 Redirect to the page
 
-http://localhost:3000/<token>
+http://localhost:3000/rk_YniNF

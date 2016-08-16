@@ -1,13 +1,9 @@
 const Joi        = require('joi');  
 const mongoose   = require('mongoose');  
 const Schema     = mongoose.Schema;  
-const shortid    = require('shortid');
-const hashLen    = 8; /* 8 chars long */  
-// Local machine? Set baseUrl to 'http://localhost:3000'
-// It's important that you don't add the slash at the end
-// or else, it will conflict with one of the routes
-const PORT			= process.env.PORT || 3000
-const baseUrl   	= process.env.BASE_URL || 'http://localhost:' + PORT;
+const createHash = require('./createhash');  
+const conf = require('./conf');  
+
 
 /* CREATING MONGOOSE SCHEMAS
 ================================================*/
@@ -39,30 +35,16 @@ module.exports = [
 	method: 'POST',
 	path: '/new',
 	handler(request, reply) {
-		const uniqueID = shortid.generate();
-		const url = request.payload.url;
-
-		Redir.findOne({ url: url }, (err, data) => {
-			// doc is a Document
-			if (err) { return reply(err); }
-			if (data !== null) { return reply(data); }
-
-
-			const newRedir = new Redir({
-				shortUrl: `${baseUrl}/${uniqueID}`,
-				url: url,
-				createdAt: new Date()
-			});
-
-			
-			newRedir.save((err, redir) => {
-				if (err) { reply(err); } else { reply(redir); }
-			});
-			
-
+		const uniqueID = createHash();
+		const newRedir = new Redir({
+			shortUrl: `${conf.BASE_URL}/${uniqueID}`,
+			url: request.payload.url,
+			createdAt: new Date()
 		});
 
-		
+		newRedir.save((err, redir) => {
+			if (err) { reply(err); } else { reply(redir); }
+		});
 	},
 	config: {
 		validate: {
@@ -79,7 +61,7 @@ module.exports = [
 	path:'/{hash}',
 	handler(request, reply) {
 		const query = {
-			'shortUrl': `${baseUrl}/${request.params.hash}`
+			'shortUrl': `${conf.BASE_URL}/${request.params.hash}`
 		};
 
 		Redir.findOne(query, (err, redir) => {
