@@ -14,6 +14,7 @@ url: ...
 
 Redirect to the page
 
+<<<<<<< HEAD
 http://localhost:3000/<token>
 
 
@@ -22,3 +23,6 @@ http://localhost:3000/<token>
 to this beautiful tutorial :)
 
 http://codetuts.tech/build-a-url-shortener-node-hapi-js
+=======
+http://localhost:3000/rk_YniNF
+>>>>>>> master
