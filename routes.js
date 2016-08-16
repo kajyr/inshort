@@ -1,7 +1,7 @@
 const Joi        = require('joi');  
 const mongoose   = require('mongoose');  
+const shortid   = require('shortid');  
 const Schema     = mongoose.Schema;  
-const createHash = require('./createhash');  
 const conf = require('./conf');  
 
 
@@ -35,7 +35,7 @@ module.exports = [
 	method: 'POST',
 	path: '/new',
 	handler(request, reply) {
-		const uniqueID = createHash();
+		const uniqueID = shortid.generate();
 		const newRedir = new Redir({
 			shortUrl: `${conf.BASE_URL}/${uniqueID}`,
 			url: request.payload.url,
