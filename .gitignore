@@ -29,6 +29,9 @@ coverage
 # Compiled binary addons (http://nodejs.org/api/addons.html)
 build/Release
 
+# Docket dev data
+docker
+
 # Dependency directories
 node_modules
 jspm_packages
@@ -42,3 +45,4 @@ jspm_packages
 .env
 
 .netlify
+lambda/
