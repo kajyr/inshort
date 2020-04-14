@@ -24,18 +24,11 @@ function alertError(code) {
 	alert(errorMessages[code] || errorMessages.default);
 }
 
-function appendHttp(url) {
-	if (url.match(/^www\./i)) {
-		return "http://" + url;
-	}
-	return url;
-}
-
 form.addEventListener("submit", function(event) {
 	event.preventDefault();
 	fetch(postEndpoint, {
 		method: "POST",
-		body: JSON.stringify({ url: appendHttp(urlBox.value) })
+		body: JSON.stringify({ url: urlBox.value })
 	}).then(response => {
 		if (response.status >= 400) {
 			if (response.body) {
@@ -45,14 +38,6 @@ form.addEventListener("submit", function(event) {
 			}
 			return alertError(response.status);
 		}
-		return response.json().then(data => {
-			console.log(data);
-		});
+		return response.json().then(displayShortenedUrl);
 	});
-	/*
-		(code, responseText, request) => {
-			
-			displayShortenedUrl(JSON.parse(responseText));
-		}
-	); */
 });
