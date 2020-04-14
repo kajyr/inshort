@@ -1,15 +1,30 @@
-const mongo = require("../db");
+const { MongoClient } = require("mongodb");
 
 exports.handler = async event => {
 	const url = event.queryStringParameters.url;
 	// if no url...
+	if (!url) {
+		return {
+			statusCode: 400,
+			body: "Missing URL"
+		};
+	}
 
-	await mongo.connect();
+	const connection = await MongoClient.connect(process.env.MONGO_URI, {
+		useUnifiedTopology: true
+	});
 
-	const model = mongo.model();
+	const db = connection.db("inshort");
+	const collection = db.collection("redirs");
 
-	const { url } = request.payload;
-	let redisObject = await model.findOne({ url });
+	const redisObject = await collection.findOne({ url });
+
+	if (!redisObject) {
+		return {
+			statusCode: 404,
+			body: "Nothing found"
+		};
+	}
 
 	return {
 		statusCode: 200,

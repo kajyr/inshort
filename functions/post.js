@@ -1,6 +1,3 @@
-const mongo = require("../db");
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
 let conn = null;
 
 exports.handler = async event => {
