@@ -4,11 +4,11 @@ body {
 
 nav {
 	height: 40px;
-	background: #FFFFFF;
+	background: #ffffff;
 	overflow: hidden;
 	padding-top: 7px;
 	vertical-align: middle;
-	border-bottom: 1px solid #DDDDDD;
+	border-bottom: 1px solid #dddddd;
 }
 
 nav h1 {
@@ -28,12 +28,12 @@ nav a {
 	line-height: 1em;
 }
 nav a i {
-	color: #BBBBBB;
+	color: #bbbbbb;
 	text-decoration: none;
 }
 
 nav a:hover i {
-	color: #DDDDDD;
+	color: #dddddd;
 }
 
 header .desc {
@@ -48,50 +48,54 @@ main form .icon-container {
 
 main form i.fa.fa-link {
 	position: absolute;
-	top: 10px; left: 15px;
-	color: #AAAAAA;
+	top: 10px;
+	left: 22px;
+	color: #aaaaaa;
 }
 
 main form input[type="text"] {
-	width: 73%;
-	float: left;
+	width: 100%;
+	border: 1px solid #eaeaea;
+	border-bottom: 2px solid #eaeaea;
+	background-color: #ffffff;
+}
+
+main form input[type="text"][name="url"] {
 	padding-left: 40px;
-	border: 1px solid #EAEAEA;
-	border-bottom: 2px solid #EAEAEA;
-	background-color: #FFFFFF;
+	float: left;
 }
 
 main form input[type="text"]:focus {
-	border: 1px solid #EAEAEA;
-	box-shadow: 0 7px 15px #EAEAEA;
-	background-color: #FFF;
+	border: 1px solid #eaeaea;
+	box-shadow: 0 7px 15px #eaeaea;
+	background-color: #fff;
 }
 
 main form input[type="submit"] {
 	width: 25%;
 	float: right;
-	background-color: #03C9A9;
+	background-color: #03c9a9;
 	clear: right;
 	border: none;
-	text-shadow: 0 2px rgba(0,0,0,0.1);
+	text-shadow: 0 2px rgba(0, 0, 0, 0.1);
 	padding: 0;
 }
 
 main form input[type="submit"]:hover {
 	background-color: #049372;
-	box-shadow: 0 7px 10px #DDDDDD;
+	box-shadow: 0 7px 10px #dddddd;
 }
 
 main section#shortened {
 	opacity: 0;
-	color: #AAAAAA;
+	color: #aaaaaa;
 	transition: all 0.5s ease;
 	margin-top: 2em;
 	margin-bottom: 1em;
 	text-align: center;
-	background: #FFF;
+	background: #fff;
 	padding: 20px;
-	box-shadow: 0 7px 15px #EAEAEA;
+	box-shadow: 0 7px 15px #eaeaea;
 }
 
 main section#shortened.visible {
@@ -105,7 +109,7 @@ main section#shortened em {
 }
 
 main section#shortened a#link {
-	background: rgba(253, 227, 167,0.3);
+	background: rgba(253, 227, 167, 0.3);
 	padding: 5px 10px;
 	margin-left: 5px;
 	font-size: 0.8em;
