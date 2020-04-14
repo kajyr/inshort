@@ -14,7 +14,7 @@ exports.handler = async event => {
 		useUnifiedTopology: true
 	});
 
-	const db = connection.db("inshort");
+	const db = connection.db(process.env.MONGO_DB);
 	const collection = db.collection("redirs");
 
 	const redisObject = await collection.findOne({ url });
