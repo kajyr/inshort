@@ -3,6 +3,9 @@ logs
 *.log
 npm-debug.log*
 
+# Mac shit
+.DS_Store
+
 # Runtime data
 pids
 *.pid
@@ -37,3 +40,5 @@ jspm_packages
 .node_repl_history
 
 .env
+
+.netlify
