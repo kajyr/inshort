@@ -1,33 +1,33 @@
 {
-  "name": "inshort",
-  "version": "1.0.0",
-  "description": "",
-  "main": "shortener.js",
-  "scripts": {
-    "start": "node shortener.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/kajyr/inshort.git"
-  },
-  "author": "Carlo 'kajyr' <carlo.panzi@gmail.com> (http://kajyr.github.io/)",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/kajyr/inshort/issues"
-  },
-  "keywords": [
-    "url",
-    "shortener",
-    "app",
-    "hapi"
-  ],
-  "homepage": "https://github.com/kajyr/inshort#readme",
-  "dependencies": {
-    "@hapi/hapi": "^19.1.1",
-    "@hapi/inert": "^6.0.1",
-    "@hapi/joi": "^17.1.1",
-    "dotenv": "^8.2.0",
-    "mongoose": "^5.9.9",
-    "shortid": "^2.2.6"
-  }
+	"name": "inshort",
+	"version": "1.0.0",
+	"description": "",
+	"main": "shortener.js",
+	"scripts": {
+		"start": "node shortener.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/kajyr/inshort.git"
+	},
+	"author": "Carlo 'kajyr' <carlo.panzi@gmail.com> (http://kajyr.github.io/)",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/kajyr/inshort/issues"
+	},
+	"keywords": [
+		"url",
+		"shortener",
+		"app",
+		"hapi"
+	],
+	"homepage": "https://github.com/kajyr/inshort#readme",
+	"dependencies": {
+		"@hapi/hapi": "^19.1.1",
+		"@hapi/inert": "^6.0.1",
+		"@hapi/joi": "^17.1.1",
+		"dotenv": "^8.2.0",
+		"mongoose": "^5.9.9",
+		"shortid": "^2.2.6"
+	}
 }

@@ -1,41 +1,43 @@
-'use strict';
+"use strict";
 
-const Hapi     = require('hapi');  
-const server   = new Hapi.Server();  
-const routes   = require('./routes');  
-const conf   	= require('./conf');  
-const mongoose = require('mongoose');  
+const Hapi = require("@hapi/hapi");
+const server = new Hapi.Server();
+const routes = require("./routes");
+const conf = require("./conf");
+const mongoose = require("mongoose");
 
-const options = {  
-	server: {
-		socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 }
-	}, 
-	replset: {
-		socketOptions: { keepAlive: 300000, connectTimeoutMS : 30000 }
-	}
+const mongoseOptions = { useNewUrlParser: true, useUnifiedTopology: true };
+
+const init = async () => {
+	// Setup hapi
+	const server = Hapi.server({
+		port: conf.PORT,
+		host: conf.HOST,
+		routes: { cors: true }
+	});
+	await server.register(require("@hapi/inert"));
+	server.route(routes);
+
+	// Setup connectiojn Mongo
+	mongoose.connect(conf.MONGO_URI, mongoseOptions);
+	const db = mongoose.connection;
+	db.on("error", () => {
+		console.error.bind(console, "connection error:");
+		process.exit(1);
+	});
+
+	db.once("open", async () => {
+		// we're connected!
+
+		// Connection hapi
+		await server.start();
+		console.log("Server running on %s", server.info.uri);
+	});
 };
 
-mongoose.connect(conf.MONGO_URI, options);
-mongoose.Promise = global.Promise;
-
-
-const db = mongoose.connection; 
-
-server.connection({  
-	port: conf.PORT,
-	routes: { cors: true }
+process.on("unhandledRejection", err => {
+	console.log(err);
+	process.exit(1);
 });
 
-server.register(require('inert'), (err) => {  
-	db.on('error', console.error.bind(console, 'connection error:'))
-	.once('open', () => {
-		console.log('Mongo connected at', conf.MONGO_URI)
-		server.route(routes);
-
-		server.start(err => {
-			if (err) throw err;
-
-			console.log(`Server running at ${server.info.uri}`);
-		});
-	});
-});
+init();
