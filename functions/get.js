@@ -1,8 +1,18 @@
-// functions/hello.js
+const mongo = require("../db");
+
 exports.handler = async event => {
-	const subject = event.queryStringParameters.name || "World";
+	const url = event.queryStringParameters.url;
+	// if no url...
+
+	await mongo.connect();
+
+	const model = mongo.model();
+
+	const { url } = request.payload;
+	let redisObject = await model.findOne({ url });
+
 	return {
 		statusCode: 200,
-		body: `Hello ${subject}! |${process.env.MONGO_URI}|`
+		body: JSON.stringify(redisObject, undefined, 2)
 	};
 };

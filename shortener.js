@@ -1,12 +1,9 @@
 "use strict";
 
 const Hapi = require("@hapi/hapi");
-const server = new Hapi.Server();
 const routes = require("./routes");
 const conf = require("./conf");
-const mongoose = require("mongoose");
-
-const mongoseOptions = { useNewUrlParser: true, useUnifiedTopology: true };
+const mongo = require("./db");
 
 const init = async () => {
 	// Setup hapi
@@ -19,20 +16,8 @@ const init = async () => {
 	server.route(routes);
 
 	// Setup connectiojn Mongo
-	mongoose.connect(conf.MONGO_URI, mongoseOptions);
-	const db = mongoose.connection;
-	db.on("error", () => {
-		console.error.bind(console, "connection error:");
-		process.exit(1);
-	});
-
-	db.once("open", async () => {
-		// we're connected!
-
-		// Connection hapi
-		await server.start();
-		console.log("Server running on %s", server.info.uri);
-	});
+	await mongo.connect();
+	console.log("Server running on %s", server.info.uri);
 };
 
 process.on("unhandledRejection", err => {
