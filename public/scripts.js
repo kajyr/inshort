@@ -10,7 +10,7 @@ function displayShortenedUrl(response) {
 	link.textContent = response.shortUrl;
 	link.setAttribute("href", response.shortUrl);
 	shrBox.classList += " visible";
-	urlBox.value = "";
+	//urlBox.value = "";
 }
 
 const errorMessages = {
