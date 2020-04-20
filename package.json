@@ -4,7 +4,7 @@
 	"description": "",
 	"main": "shortener.js",
 	"scripts": {
-		"start": "light-server -c .lightserverrc",
+		"start": "npx light-server -s ./public -x https://link-shortener-d7cffc.netlify.app --proxypath \"/.netlify\"",
 		"build": "netlify-lambda build functions",
 		"deploy": "netlify deploy"
 	},
@@ -33,7 +33,5 @@
 		"netlify-lambda": "^1.6.3",
 		"shortid": "^2.2.6"
 	},
-	"devDependencies": {
-		"light-server": "^2.6.4"
-	}
+	"devDependencies": {}
 }
