@@ -1,6 +1,20 @@
 const { MongoClient } = require("mongodb");
+const shortid = require("shortid");
 
+const VERSION = "1.0.2";
 let connection = null;
+
+function justPost(fn) {
+	return (event, context, callback) => {
+		if (event.httpMethod !== "POST") {
+			callback(null, {
+				statusCode: 405,
+				body: "Method Not Allowed"
+			});
+		}
+		return fn(event, context, callback);
+	};
+}
 
 exports.handler = async (event, context, callback) => {
 	// Only allow POST
@@ -23,9 +37,9 @@ exports.handler = async (event, context, callback) => {
 	const { url } = params;
 
 	if (!url) {
-		return {
+		callback(null, {
 			statusCode: 400
-		};
+		});
 	}
 
 	try {
@@ -41,10 +55,8 @@ exports.handler = async (event, context, callback) => {
 		let redisObject = await collection.findOne({ url });
 
 		if (!redisObject) {
-			const uniqueID = shortid.generate();
-
 			redisObject = {
-				hash: uniqueID,
+				hash: shortid.generate(),
 				url,
 				createdAt: new Date()
 			};
@@ -53,7 +65,7 @@ exports.handler = async (event, context, callback) => {
 		}
 
 		const ret = {
-			shortUrl: `/${redisObject.hash}`,
+			hash: `${redisObject.hash}`,
 			createdAt: redisObject.createdAt,
 			url: redisObject.url
 		};
@@ -63,9 +75,6 @@ exports.handler = async (event, context, callback) => {
 			body: JSON.stringify(ret)
 		});
 	} catch (e) {
-		callback({
-			statusCode: 500,
-			body: JSON.stringify(e)
-		});
+		callback(e);
 	}
 };
