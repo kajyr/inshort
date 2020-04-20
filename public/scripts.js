@@ -7,7 +7,7 @@ var shrBox = document.getElementById("shortened");
 var postEndpoint = "/.netlify/functions/post";
 
 function displayShortenedUrl(response) {
-	const url = `${location.href}${response.hash}`;
+	const url = `${location.href}r/${response.hash}`;
 	link.textContent = url;
 	link.setAttribute("href", url);
 	shrBox.classList += " visible";
