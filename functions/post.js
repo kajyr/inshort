@@ -9,19 +9,34 @@ function justPost(fn) {
 		if (event.httpMethod !== "POST") {
 			callback(null, {
 				statusCode: 405,
-				body: "Method Not Allowed"
+				body: "Method Not Allowed",
 			});
 		}
 		return fn(event, context, callback);
 	};
 }
 
-exports.handler = async (event, context, callback) => {
+function auth(fn) {
+	return (event, context, callback) => {
+		const params = JSON.parse(event.body);
+		const { apiKey } = params;
+
+		if (apiKey !== process.env.AUTH_KEY) {
+			callback(null, {
+				statusCode: 401,
+			});
+			return;
+		}
+		return fn(event, context, callback);
+	};
+}
+
+exports.handler = auth(async (event, context, callback) => {
 	// Only allow POST
 	if (event.httpMethod !== "POST") {
 		return {
 			statusCode: 405,
-			body: "Method Not Allowed"
+			body: "Method Not Allowed",
 		};
 	}
 	//the following line is critical for performance reasons to allow re-use of
@@ -38,14 +53,14 @@ exports.handler = async (event, context, callback) => {
 
 	if (!url) {
 		callback(null, {
-			statusCode: 400
+			statusCode: 400,
 		});
 	}
 
 	try {
 		if (!connection) {
 			connection = await MongoClient.connect(process.env.MONGO_URI, {
-				useUnifiedTopology: true
+				useUnifiedTopology: true,
 			});
 		}
 
@@ -58,7 +73,7 @@ exports.handler = async (event, context, callback) => {
 			redisObject = {
 				hash: shortid.generate(),
 				url,
-				createdAt: new Date()
+				createdAt: new Date(),
 			};
 
 			await collection.insertOne(redisObject);
@@ -67,14 +82,14 @@ exports.handler = async (event, context, callback) => {
 		const ret = {
 			hash: `${redisObject.hash}`,
 			createdAt: redisObject.createdAt,
-			url: redisObject.url
+			url: redisObject.url,
 		};
 
 		callback(null, {
 			statusCode: 201,
-			body: JSON.stringify(ret)
+			body: JSON.stringify(ret),
 		});
 	} catch (e) {
 		callback(e);
 	}
-};
+});
