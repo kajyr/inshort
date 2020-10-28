@@ -15,7 +15,7 @@
     "release:minor": "yarn changelog -m && yarn version:minor",
     "release:patch": "yarn changelog -p && yarn version:patch",
     "postversion": "git push origin && git push origin --tags",
-    "mongodev": "docker run  --rm --name inshort-db -p 7001:27017 -v /Users/c.panzi/Projects/inshort/docker/mongo:/data/db -e MONGO_INITDB_ROOT_USERNAME=root -e MONGO_INITDB_ROOT_PASSWORD=example -d mongo"
+    "mongodev": "docker run  --rm --name inshort-db -p 27017:27017 -v /Users/c.panzi/Projects/inshort/docker/mongo:/data/db -e MONGO_INITDB_ROOT_USERNAME=root -e MONGO_INITDB_ROOT_PASSWORD=example mongo"
   },
   "repository": {
     "type": "git",
