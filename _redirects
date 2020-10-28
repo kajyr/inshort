@@ -1,2 +1,0 @@
-# Redirects from what the browser requests to what we serve
-/r/*  https://link-shortener-d7cffc.netlify.app/.netlify/functions/get?h=:splat
