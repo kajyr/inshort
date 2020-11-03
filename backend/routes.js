@@ -1,6 +1,6 @@
 const { nanoid } = require('nanoid');
 
-const format = ({ hash, createdAt, url }) => ({ hash, createdAt, url });
+const format = ({ hash, createdAt, url, hits = 0 }) => ({ hash, createdAt, url, hits });
 
 const routes = [
   {
@@ -41,6 +41,7 @@ const routes = [
         hash: uniqueID,
         url,
         createdAt: new Date(),
+        hits: 0,
       };
 
       await collection.insertOne(newUrl);
@@ -58,6 +59,13 @@ const routes = [
       const found = await collection.findOne({ hash });
 
       if (found) {
+        const updateDoc = {
+          $set: {
+            hits: (found.hits || 0) + 1,
+          },
+        };
+        await collection.updateOne({ hash }, updateDoc);
+
         reply.redirect(301, found.url);
         return;
       }
