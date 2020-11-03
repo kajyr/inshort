@@ -41,9 +41,12 @@ nav a:hover i {
 }
 
 header .desc {
-  padding-top: 2em;
   text-align: center;
   font-size: 1.4em;
+}
+
+header {
+  margin-bottom: 2em;
 }
 
 main form .icon-container {
@@ -76,10 +79,8 @@ main form input[type='text']:focus {
 }
 
 main form input[type='submit'] {
-  width: 25%;
-  float: right;
+  width: 100%;
   background-color: #03c9a9;
-  clear: right;
   border: none;
   text-shadow: 0 2px rgba(0, 0, 0, 0.1);
   padding: 0;
@@ -90,10 +91,11 @@ main form input[type='submit']:hover {
   box-shadow: 0 7px 10px #dddddd;
 }
 
-main section#shortened {
+#shortened {
+  display: none;
   opacity: 0;
   color: #aaaaaa;
-  transition: all 0.5s ease;
+  transition: opacity 0.5s ease;
   margin-top: 2em;
   margin-bottom: 1em;
   text-align: center;
@@ -102,20 +104,29 @@ main section#shortened {
   box-shadow: 0 7px 15px #eaeaea;
 }
 
-main section#shortened.visible {
+#shortened.visible {
   opacity: 1;
+  display: block;
 }
 
-main section#shortened em {
+#shortened em {
   font-weight: bold;
   color: #666666;
   font-style: normal;
 }
 
-main section#shortened a#link {
+#shortened a#link {
   background: rgba(253, 227, 167, 0.3);
   padding: 5px 10px;
   margin-left: 5px;
   font-size: 0.8em;
   color: #555555;
+}
+
+#list-table {
+  display: none;
+}
+
+#list-table.visible {
+  display: block;
 }

@@ -65,6 +65,29 @@ const routes = [
       return;
     },
   },
+  {
+    method: 'GET',
+    url: '/list/:apiKey',
+    schema: {
+      type: 'object',
+      required: ['url', 'apiKey'],
+      properties: {
+        url: { type: 'string' },
+        apiKey: { type: 'string' },
+      },
+    },
+    handler: async function (request, reply) {
+      const { apiKey } = request.params;
+      if (!apiKey || apiKey !== process.env.API_KEY) {
+        reply.code(401).send();
+        return;
+      }
+      const collection = await this.mongo.db.collection('urls');
+      const found = await collection.find({}).toArray();
+
+      return found.map(format);
+    },
+  },
 ];
 
 module.exports = function (fastify, opts, done) {
