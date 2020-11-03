@@ -78,6 +78,7 @@ submitForm.addEventListener('submit', function (event) {
 
       listTable.classList += ' visible';
       const tbody = listTable.querySelector('tbody');
+      tbody.innerHTML = '';
 
       for (elem of data) {
         const row = listRowTemplate.content.cloneNode(true);
@@ -87,6 +88,8 @@ submitForm.addEventListener('submit', function (event) {
         tds[0].textContent = elem.url;
         link.setAttribute('href', getShortened(elem));
         link.textContent = getShortened(elem);
+        tds[2].textContent = elem.hits;
+
         tbody.appendChild(row);
       }
     });
