@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>InShort - Very Simple URL Shortener</title>
+    <meta name="description" content="A simple URL shortener made with hapi.js and Node" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.1.0/milligram.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="icon" href="/fav/icon-192.png" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="container">
+          <div class="row">
+            <div class="column"><h1 class="logo">InShort</h1></div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="container">
+        <h2>Url Shortener</h2>
+        <form id="shorten-form" method="POST" class="row">
+          <div class="column column-20">
+            <input type="text" placeholder="Auth key" name="auth" />
+          </div>
+          <div class="column icon-container">
+            <input type="text" placeholder="Paste your URL here..." name="url" />
+            <i class="fa fa-link"></i>
+          </div>
+          <div class="column column-20">
+            <input type="submit" value="Shorten!" />
+          </div>
+        </form>
+
+        <div class="row" id="shortened">
+          <div class="column">
+            <p>
+              <em>Your shortened link: </em>
+              <a id="link" href="#" target="_blank">Loading...</a>
+            </p>
+            <p>
+              Right-click or Tap &amp; Hold the link and copy the address to clipboard and start
+              using it.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section class="container">
+        <h2>List of available urls</h2>
+        <form id="list-form" method="GET" class="row">
+          <div class="column column-20">
+            <input type="text" placeholder="Auth key" name="auth" />
+          </div>
+          <div class="column column-20">
+            <input type="submit" value="Get list" />
+          </div>
+        </form>
+        <div class="row" id="list-table">
+          <div class="column">
+            <table>
+              <thead>
+                <tr>
+                  <td>Url</td>
+                  <td>Shortened</td>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- existing data could optionally be included here -->
+              </tbody>
+            </table>
+
+            <template id="list-row-template">
+              <tr>
+                <td></td>
+                <td><a class="shortened" href="#" target="_blank"></a></td>
+              </tr>
+            </template>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="/scripts.js"></script>
+  </body>
+</html>

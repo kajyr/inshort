@@ -41,9 +41,9 @@ const init = async () => {
   // Routes
   await fastify.register(require('./routes'));
 
-  /* fastify.get('/', async (request, reply) => {
-    reply.sendFile('index.html');
-  }); */
+  fastify.get('/', async (request, reply) => {
+    reply.sendFile('404.html');
+  });
 
   try {
     await fastify.listen({ port: PORT });
