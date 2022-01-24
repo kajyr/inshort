@@ -5,18 +5,21 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "watch:backend": "nodemon server.js"
+    "watch": "nodemon server.js"
   },
   "dependencies": {
     "colors": "^1.4.0",
     "dotenv": "^14.2.0",
     "fastify": "^3.27.0",
     "fastify-log": "^1.2.1",
-    "mongodb": "^3.5.6",
-    "fastify-mongodb": "^4.1.1",
-    "fastify-routes": "^3.1.0",
+    "fastify-plugin": "^3.0.0",
+    "fastify-routes-table": "^0.1.0",
     "fastify-static": "^4.5.0",
-    "nanoid": "^3.2.0"
+    "mongodb": "^3.5.6",
+    "nanoid": "^3.2.0",
+    "split2": "^4.1.0",
+    "temp": "^0.9.4",
+    "through2": "^4.0.2"
   },
   "devDependencies": {
     "lerna": "^4.0.0",

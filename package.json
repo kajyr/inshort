@@ -2,7 +2,6 @@
   "name": "inshort",
   "version": "2.1.0",
   "description": "",
-  "main": "shortener.js",
   "scripts": {
     "start": "node backend/server.js",
     "watch:backend": "nodemon backend/server.js",
