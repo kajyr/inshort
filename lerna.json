@@ -1,0 +1,23 @@
+{
+  "packages": [
+    "frontend",
+    "backend"
+  ],
+  "version": "1.6.0",
+  "command": {
+    "publish": {
+      "message": "chore(release): publish",
+      "allowBranch": "main",
+      "ignoreChanges": [
+        "*.test.js",
+        "*.test.ts",
+        "*.test.tsx",
+        "*.md"
+      ],
+      "conventionalCommits": true
+    },
+    "version": {
+      "conventionalCommits": true
+    }
+  }
+}
