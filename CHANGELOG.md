@@ -1,3 +1,19 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [2.2.0](https://github.com/kajyr/inshort/compare/v2.1.0...v2.2.0) (2022-01-25)
+
+
+### Features
+
+* csv based backend ([617a6af](https://github.com/kajyr/inshort/commit/617a6af41f1922020615678bd590632cfe691c42))
+
+
+
+
+
 ### 2.1.0 (2020-11-03)
 
 ##### Build System / Dependencies
@@ -19,4 +35,3 @@
 ##### Refactors
 
 *  Back to mongo / docker ([6e4bd97c](https://github.com/kajyr/inshort/commit/6e4bd97c1eb616da3ac3b0383d029006b2b58f65))
-
