@@ -1,12 +1,10 @@
 const fp = require('fastify-plugin');
 const split2 = require('split2');
-const temp = require('temp');
 const { pipeline } = require('stream/promises');
 const { createReadStream, createWriteStream } = require('fs');
 
 const { Transform, Readable, Writable } = require('stream');
 const { rename, appendFile } = require('fs/promises');
-temp.track();
 
 const encode = (obj) => `${obj.url},${obj.hash},${obj.hits}\n`;
 
@@ -66,7 +64,7 @@ const updateTrx = (query, updated) =>
 
 function update(file) {
   return async (query, updated) => {
-    const write = temp.createWriteStream();
+    const tmpPath = `${file}.tmp`;
 
     await pipeline(
       createReadStream(file),
@@ -74,10 +72,10 @@ function update(file) {
       lineToObj(),
       updateTrx(query, updated),
       objToLine(),
-      write
+      createWriteStream(tmpPath)
     );
 
-    await rename(write.path, file);
+    await rename(tmpPath, file);
   };
 }
 
