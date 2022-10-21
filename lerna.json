@@ -1,23 +1,16 @@
 {
-  "packages": [
-    "frontend",
-    "backend"
-  ],
-  "version": "2.2.1",
   "command": {
     "publish": {
-      "message": "chore(release): publish",
-      "allowBranch": "master",
-      "ignoreChanges": [
-        "*.test.js",
-        "*.test.ts",
-        "*.test.tsx",
-        "*.md"
-      ],
-      "conventionalCommits": true
+      "allowBranch": "main",
+      "conventionalCommits": true,
+      "ignoreChanges": ["*.test.js", "*.test.ts", "*.test.tsx", "*.md"],
+      "message": "chore(release): publish"
     },
     "version": {
       "conventionalCommits": true
     }
-  }
+  },
+  "packages": ["backend"],
+  "useNx": true,
+  "version": "1.8.1"
 }
