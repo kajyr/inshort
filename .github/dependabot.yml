@@ -9,14 +9,14 @@ updates:
     directory: '/' # Location of package manifests
     schedule:
       interval: 'monthly'
-    reviewers:
+    assignees:
       - 'kajyr'
     open-pull-requests-limit: 3
    - package-ecosystem: 'npm' # See documentation for possible values
     directory: '/backend' # Location of package manifests
     schedule:
       interval: 'monthly'
-    reviewers:
+    assignees:
       - 'kajyr'
     open-pull-requests-limit: 3
   - package-ecosystem: "github-actions"
@@ -25,6 +25,6 @@ updates:
       interval: "monthly"
     labels:
       - "dependencies"
-     reviewers:
+     assignees:
       - 'kajyr'
     open-pull-requests-limit: 3
