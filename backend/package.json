@@ -19,7 +19,6 @@
     "split2": "^4.1.0"
   },
   "devDependencies": {
-    "lerna": "^4.0.0",
     "nodemon": "^2.0.15"
   }
 }
