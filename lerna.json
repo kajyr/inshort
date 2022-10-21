@@ -3,14 +3,21 @@
     "publish": {
       "allowBranch": "main",
       "conventionalCommits": true,
-      "ignoreChanges": ["*.test.js", "*.test.ts", "*.test.tsx", "*.md"],
+      "ignoreChanges": [
+        "*.test.js",
+        "*.test.ts",
+        "*.test.tsx",
+        "*.md"
+      ],
       "message": "chore(release): publish"
     },
     "version": {
       "conventionalCommits": true
     }
   },
-  "packages": ["backend"],
+  "packages": [
+    "backend"
+  ],
   "useNx": true,
-  "version": "1.8.1"
+  "version": "2.2.2"
 }
